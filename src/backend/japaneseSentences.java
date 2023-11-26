@@ -33,7 +33,7 @@ public class japaneseSentences {
 			String userAnswer = scanner.nextLine();
 
 			if (userAnswer.equals(englishTranslatedString)) {
-				System.out.println("Good job!");
+				System.out.println("Good job!!");
 
 				// Continue to the next iteration of the loop
 				continue;
