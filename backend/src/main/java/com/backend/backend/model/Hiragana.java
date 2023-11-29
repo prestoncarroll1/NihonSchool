@@ -1,5 +1,6 @@
 package com.backend.backend.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
 import jakarta.persistence.GeneratedValue;
@@ -12,6 +13,8 @@ public class Hiragana {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
+//	@Column(name = "hiragana_characters")
 	private String hiraganaCharacters;
 	
 //	= { 'あ', 'い', 'う', 'え', 'お', 'か', 'き', 'く', 'け', 'こ', 'さ', 'し', 'す', 'せ',
@@ -25,19 +28,12 @@ public class Hiragana {
 		this.id = id;
 	}
 	
-	public String getHiraganaChars() {
-		return hiraganaCharacters;
+	public String getHiraganaCharacters() {
+		return hiraganaCharacters;		
 	}
-	public void setHiraganaChars(String hiraganaCharacters) {
+	
+	public void setHiraganaCharacters(String hiraganaCharacters) {
 		this.hiraganaCharacters = hiraganaCharacters;
 	}
-	
-
-
-	
-	
-	
-	
-	
 	
 }
