@@ -1,10 +1,9 @@
 package com.backend.backend.service;
 
+
 import com.backend.backend.model.JpSentences;
 import com.backend.backend.repository.JpSentencesRepository;
-
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

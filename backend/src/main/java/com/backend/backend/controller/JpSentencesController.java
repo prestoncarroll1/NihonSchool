@@ -9,11 +9,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.backend.backend.model.JpSentences;
 import com.backend.backend.service.JpSentencesService;
 
 @RestController
-@RequestMapping("/japaneseSentences")
+@RequestMapping("/jpsentences")
 @CrossOrigin
 public class JpSentencesController {
 
@@ -23,11 +24,11 @@ public class JpSentencesController {
 	@PostMapping("/add")
 	public String add(@RequestBody JpSentences jpSentences) {
 		jpSentencesService.saveJpSentences(jpSentences);
-		return "New Hiragana response is added.";
+		return "New jpsentence is added.";
 	}
 	
 	@GetMapping("/getAll")
-	public List<JpSentences> getAllJapaneseSentences(){
+	public List<JpSentences> getAllJpSentences(){
 		return jpSentencesService.getAllJpSentences();
 	}
 }

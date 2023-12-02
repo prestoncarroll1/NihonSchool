@@ -14,22 +14,31 @@ public class JpSentences {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-//	@Column(name = "japaneseSenteces")
-	private String jpSentences;
+//	@Column(name = "jp_Sentece")
+	private String jpSentence;
+//	@Column(name = "eng_Sentece")
+	private String engSentence;
 	
-
 	public int getId() {
 		return id;
 	}
+	
 	public void setId(int id) {
 		this.id = id;
 	}
 	
-	public String getJapaneseSentences() {
-		return jpSentences;		
+	public String getJpSentence() {
+		return jpSentence;		
 	}
 	
-	public void setJapaneseSentences(String japaneseSentences) {
-		this.jpSentences = japaneseSentences;
+	public void setJpSentence(String jpSentence) {
+		this.jpSentence = jpSentence;
 	}	
+	
+	public String getEngSentence() {
+		return engSentence;
+	}
+	public void setEngSentence(String engSentence) {
+		this.engSentence = engSentence;
+	}
 }
