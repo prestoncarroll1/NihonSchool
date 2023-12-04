@@ -6,7 +6,7 @@ import {Container , Paper, Button} from '@mui/material'
 
 export default function Hiragana() {
 
-    const [hiraganaCharacters, setHiraganaCharacters]= useState('')
+    const [hiraganaCharacters, setHiraganaCharacters]= useState('');
     const paperStyle = {padding: '50px 20px', width:600, margin: "20px auto"}
     const handleClick=(e)=>{
         e.preventDefault()

@@ -23,5 +23,14 @@ public class JpSentencesServiceImpl implements JpSentencesService {
 	public List<JpSentences> getAllJpSentences(){
 		return jpSentencesRepository.findAll();
 	}
+	
+	@Override
+	public JpSentences getRandomJpSentence() {
+	    // Use a native query with ORDER BY RAND() to get a random sentence
+	    List<JpSentences> sentences = jpSentencesRepository.findRandomSentence();
+	    
+	    // Check if the list is not empty before returning
+	    return sentences.isEmpty() ? null : sentences.get(0);
+	}
 
 }

@@ -9,6 +9,8 @@ public interface JpSentencesService {
 
 	List<JpSentences> getAllJpSentences();
 	
+	JpSentences getRandomJpSentence();
+	
 }
 
 

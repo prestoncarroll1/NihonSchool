@@ -31,4 +31,12 @@ public class JpSentencesController {
 	public List<JpSentences> getAllJpSentences(){
 		return jpSentencesService.getAllJpSentences();
 	}
+	
+	@GetMapping("/getRandom")
+	public JpSentences getRandomJpSentence() {
+	    return jpSentencesService.getRandomJpSentence();
+	}
+	
+	
+	
 }
