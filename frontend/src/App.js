@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
     <AppBar/>
-    <Hiragana />
+    {/* <Hiragana /> */}
     <JpSentences />
     </div>
   );

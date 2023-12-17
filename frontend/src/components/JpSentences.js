@@ -8,23 +8,50 @@ import { useEffect, useState } from 'react';
 export default function JpSentences() {
 
     const paperStyle = {padding: '50px 20px', width:600, margin: "20px auto"}
-    const [jpSentence, setJpSentence]= useState('');
-    // const [engSentence, setEngSentence]= useState('');
+    const [sentenceData, setSentenceData] = useState({ jpSentence: '', engSentence: '' });
+    const [userInput, setUserInput] = useState('');
+    const [isCorrect, setIsCorrect] = useState(false);
 
     useEffect(()=>{
       fetch("http://localhost:8080/jpsentences/getRandom")
-      .then(res=> res.json())
-      .then((result)=>{
-        setJpSentence(result.jpSentence)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! Status: ${res.status}`);
+        }
+        return res.json();
       })
-    },[])
+      .then((result) => {
+        // Check if the response has the expected structure
+        if (result && result.jpSentence && result.engSentence) {
+          setSentenceData(result);
+        } else {
+          console.error('Invalid response format:', result);
+        }
+      })
+      .catch((error) => console.error('Error fetching random JP sentence:', error));
+  }, []);
 
-    
+  const handleKeyDown = (e) => {
+    if (e.code === "Enter") {
+      e.preventDefault();
+      handleSubmit();
+    } else {
+      setUserInput(e.target.value);
+    }
+  };
+
+  const handleSubmit = () => {
+    // Compare user input with engSentence
+    const isInputCorrect = userInput.trim() === sentenceData.engSentence.trim();
+    setIsCorrect(isInputCorrect);
+  };
+
   return (
     <Container>
         <Paper elevation={3} style={paperStyle}>
             <h1>What does this say?</h1>
-            <h2> {jpSentence} </h2>
+            <h2>{sentenceData.jpSentence} </h2>
+            {/* <h3>{sentenceData.engSentence}</h3> */}
     <Box
       component="form"
       sx={{
@@ -33,9 +60,18 @@ export default function JpSentences() {
       noValidate
       autoComplete="off"
     >
-      <TextField id="outlined-basic" label="Jp" variant="outlined" fullWidth/>
+      <TextField 
+      id="outlined-basic" 
+      label="Don't worry about symbols / punctuation!" 
+      variant="outlined" 
+      fullWidth
+      value={userInput}
+      onChange={handleKeyDown}
+      onKeyDown={handleKeyDown}
+      />
     <br></br>
-    <Button variant="contained" >Submit</Button>
+    <Button variant="contained" onClick={handleSubmit} >Submit</Button>
+    {isCorrect && <p>Correct!</p>}
     </Box>
     </Paper>
     </Container>
