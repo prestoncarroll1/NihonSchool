@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import {Container , Paper, Button} from '@mui/material'
 import { useEffect, useState } from 'react';
+import { Try } from '@mui/icons-material';
 
 export default function JpSentences() {
 
@@ -11,8 +12,13 @@ export default function JpSentences() {
     const [sentenceData, setSentenceData] = useState({ jpSentence: '', engSentence: '' });
     const [userInput, setUserInput] = useState('');
     const [isCorrect, setIsCorrect] = useState(false);
+    const [correctOrTryAgain, setCorrectOrTryAgain] = useState('');
 
-    useEffect(()=>{
+    useEffect(() => {
+      fetchRandomSentence();
+    }, [isCorrect]);
+
+    const fetchRandomSentence = () => {
       fetch("http://localhost:8080/jpsentences/getRandom")
       .then((res) => {
         if (!res.ok) {
@@ -29,7 +35,7 @@ export default function JpSentences() {
         }
       })
       .catch((error) => console.error('Error fetching random JP sentence:', error));
-  }, []);
+  };
 
   const handleKeyDown = (e) => {
     if (e.code === "Enter") {
@@ -44,6 +50,16 @@ export default function JpSentences() {
     // Compare user input with engSentence
     const isInputCorrect = userInput.trim() === sentenceData.engSentence.trim();
     setIsCorrect(isInputCorrect);
+
+    if (isInputCorrect) {
+      // If the input is correct, fetch a new random sentence
+      fetchRandomSentence();
+      setUserInput("")
+      setCorrectOrTryAgain("Correct!")
+    }
+    else {
+      setCorrectOrTryAgain("Try again.")
+    }
   };
 
   return (
@@ -51,7 +67,6 @@ export default function JpSentences() {
         <Paper elevation={3} style={paperStyle}>
             <h1>What does this say?</h1>
             <h2>{sentenceData.jpSentence} </h2>
-            {/* <h3>{sentenceData.engSentence}</h3> */}
     <Box
       component="form"
       sx={{
@@ -71,7 +86,7 @@ export default function JpSentences() {
       />
     <br></br>
     <Button variant="contained" onClick={handleSubmit} >Submit</Button>
-    {isCorrect && <p>Correct!</p>}
+    {correctOrTryAgain}
     </Box>
     </Paper>
     </Container>
